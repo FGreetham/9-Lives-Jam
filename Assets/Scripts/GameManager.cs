@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
 {
+    public bool isGameActive;
     public TextMeshProUGUI livesText;
     private int lives;
-    public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI outOfLivesText;
+    public Button restartButton;
 
     // Start is called before the first frame update
     void Start()
     {
+        isGameActive = true;
         lives = 9;
         UpdateLives(0);
     }
@@ -25,17 +30,27 @@ public class GameManager : MonoBehaviour
 
    public void UpdateLives(int livesToRemove)
     {
+         
         lives -= livesToRemove;
         livesText.text = lives + "/9 Lives";
-        if (lives == 0)
+         if (lives == 0)
         {
+            outOfLivesText.gameObject.SetActive(true);
             GameOver();
         }
     }
 
     public void GameOver()
     {
-        gameOverText.gameObject.SetActive(true);
+        isGameActive = false;
+        restartButton.gameObject.SetActive(true);
     }
+
+    public void RestartGame()
+    {
+        //SWITCH INDEX FRO 0 to 1 WHEN YOU HAVE START SCENE
+        SceneManager.LoadScene(SceneManager.GetSceneAt(0).name);
+       // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }    
 
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Respawn : MonoBehaviour
 {
     private GameManager gameManager;
@@ -15,8 +16,12 @@ public class Respawn : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        player.transform.rotation = Quaternion.Euler(0, -90f, 0);
-        player.transform.position = respawnPoint.transform.position;
-        gameManager.UpdateLives(1);
+        if (gameManager.isGameActive == true)
+        {
+            player.transform.rotation = Quaternion.Euler(0, -90f, 0);
+            player.transform.position = respawnPoint.transform.position;
+            gameManager.UpdateLives(1);
+        }
+      
     }
 }
