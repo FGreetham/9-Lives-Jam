@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-
+    private GameManager gameManager;
     private float speed = 1.5f;
     public float turnSpeed = 40f;
     private float turn;
     private float move;
     Animator anim;
-  
+
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Invoke("Movement", 0);
+        if(gameManager.isGameActive == true)
+        {
+            Invoke("Movement", 0);
+        }
+        
     }
 
     void Movement()
@@ -30,12 +35,9 @@ public class PlayerControl : MonoBehaviour
         move = Input.GetAxis("Vertical");
         transform.Translate(Vector3.forward * Time.deltaTime * speed * move);
         transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed * turn);
-
+        
         //Animation for walking
-      //  float moveForward = Input.GetAxis("Vertical");
         anim.SetFloat("Speed", move);
     }
-    
-
 
 }

@@ -18,24 +18,28 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        //Counts down the seconds
-        if (timeValue > 0)
-        {
-            timeValue -= Time.deltaTime;
-        }
-        else
-        { //Stops it going below zero.
-            timeValue = 0;
-        }
+ if (gameManager.isGameActive == true)
+        { 
+            //Display Text
+            DisplayTime(timeValue);
+
+            //Counts down the seconds
+            if (timeValue > 0f)
+            {
+                timeValue -= Time.deltaTime;
+            }
+            else
+            { //Stops it going below zero.
+                timeValue = 0;
+            }
+         }
 
         if(timeValue < 0)
         {
             outOfTimeText.gameObject.SetActive(true);
             gameManager.GameOver();
         }
-
-        //Display Text
-        DisplayTime(timeValue);
+         
     }
 
     void DisplayTime(float timeToDisplay)
@@ -45,7 +49,7 @@ public class Timer : MonoBehaviour
         {
             timeToDisplay = 0;
         }
-        else if(timeToDisplay > 0)
+        else if(timeToDisplay > 0.1f)
         {
             timeToDisplay += 1;
         }
