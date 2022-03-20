@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     private int lives;
     public TextMeshProUGUI outOfLivesText;
     public Button restartButton;
-    public Toggle music;
+    //public Toggle music;
 
     // Start is called before the first frame update
     void Start()
@@ -46,13 +46,14 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = false;
         restartButton.gameObject.SetActive(true);
-        music.gameObject.SetActive(true);
+        //music.gameObject.SetActive(true);
     }
 
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
        
-    }    
+    }
+
 
 }
